@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>BOARD Capture</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Capture">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#000000">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="capture.css?v=1">
+</head>
+<body>
+<div id="app" data-mode="scan">
+  <header id="top">
+    <button id="statusBtn" type="button"><span id="dot" data-s="idle"></span><span id="statusText">Ready</span></button>
+    <span class="grow"></span>
+    <button id="filterBtn" class="chip scanonly" type="button">Document</button>
+    <button id="autoBtn" class="chip scanonly on" type="button">Auto</button>
+    <button id="menuBtn" type="button" aria-label="Menu">•••</button>
+  </header>
+  <main id="stage">
+    <section id="scan" class="pane">
+      <video id="video" playsinline muted autoplay></video>
+      <canvas id="overlay"></canvas>
+      <div id="flash"></div>
+      <div id="hint">Point at a page</div>
+      <div id="camGate" hidden><div id="camMsg">The camera is off.</div><button id="camBtn" type="button">Turn on the camera</button></div>
+    </section>
+    <section id="voice" class="pane">
+      <div id="vtime">0:00</div>
+      <canvas id="meter" width="640" height="140"></canvas>
+      <div id="vhint">Tap to record</div>
+    </section>
+  </main>
+  <footer id="bottom">
+    <div id="controls">
+      <button id="stackBtn" type="button" aria-label="Pages" hidden><img id="stackImg" alt=""><span id="stackN">1</span></button>
+      <button id="shutter" type="button" aria-label="Capture"><svg viewBox="0 0 80 80" aria-hidden="true"><circle class="ring" cx="40" cy="40" r="36"/><circle id="prog" class="prog" cx="40" cy="40" r="36"/><rect id="core" class="core" x="10" y="10" width="60" height="60" rx="30"/></svg></button>
+      <button id="sendBtn" type="button" hidden>Send</button>
+    </div>
+    <nav id="modes"><button type="button" data-mode="scan" class="on">SCAN</button><button type="button" data-mode="voice">VOICE</button></nav>
+  </footer>
+</div>
+
+<section id="review" hidden>
+  <header class="rbar"><button id="reviewClose" type="button">Back</button><div id="reviewTitle">1 page</div><button id="reviewAdd" type="button">Add</button></header>
+  <div id="rgrid"></div>
+  <footer class="rfoot">
+    <div id="format" class="seg"><button type="button" data-f="pdf" class="on">PDF</button><button type="button" data-f="images">Pictures</button></div>
+    <button id="reviewSend" type="button" class="primary">Send to BOARD</button>
+  </footer>
+</section>
+
+<section id="editor" hidden>
+  <header class="rbar"><button id="edDelete" type="button" class="danger">Delete</button><div id="edTitle">Page 1</div><button id="edDone" type="button" class="strong">Done</button></header>
+  <div id="edStage"><img id="edImg" alt=""><svg id="edSvg"></svg></div>
+  <footer class="rfoot">
+    <div id="edFilter" class="seg"><button type="button" data-m="doc">Document</button><button type="button" data-m="board">Whiteboard</button><button type="button" data-m="photo">Original</button></div>
+    <button id="edRotate" type="button">Rotate</button>
+  </footer>
+</section>
+
+<div id="shade" hidden></div>
+<section id="sheet" hidden><div id="sheetBody"></div></section>
+<div id="gate" hidden></div>
+<div id="toast" hidden><span id="toastText"></span><button id="toastAct" type="button" hidden></button></div>
+<script src="scan.js?v=1"></script>
+<script src="capture.js?v=1"></script>
+</body>
+</html>
